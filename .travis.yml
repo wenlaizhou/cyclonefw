@@ -1,0 +1,22 @@
+group: travis_latest
+language: python
+cache: pip
+matrix:
+  include:
+    #- python: 2.7
+    #- python: 3.4
+    #- python: 3.5
+    #- python: 3.6
+    - python: 3.7
+      dist: xenial    # required for Python >= 3.7 (travis-ci/travis-ci#9069)
+install:
+  # - pip install -r requirements.txt
+  - pip install -r requirements-test.txt
+before_script:
+  - flake8 . --max-line-length=127
+  - bandit -r .
+script:
+  - python setup.py test  # add other tests here
+notifications:
+  on_success: change
+  on_failure: change  # `always` will be the setting once code changes slow down
