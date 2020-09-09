@@ -115,10 +115,9 @@ def register(consulServer, name, ip, port, tags):
         "check": {}
     }
     try:
-        resp = requests.put("{}/v1/agent/service/register".format(consulServer), headers={
+        requests.put("{}/v1/agent/service/register".format(consulServer), headers={
             "Content-Type": "application/json"
         }, data=json.dumps(data))
-        print(resp)
     except Exception as e:
         print(e)
 
