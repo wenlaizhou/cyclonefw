@@ -13,12 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import os, time
+import os
+import time
 from flask import Flask, request, Response
 from flask_restx import Api, Namespace
 from flask_cors import CORS
 from .default_config import API_TITLE, API_DESC, API_VERSION
-from .utils import getLogger, getHostnameAndIp, register
+from .utils import getLogger, getHostnameAndIp, register, logHandler
+import logging
+
+# 重新定义flask日志
+logging.getLogger("werkzeug").addHandler(logHandler("flask"))
 
 MAX_API = Namespace('model', description='Model information and inference operations')
 
