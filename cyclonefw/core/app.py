@@ -113,4 +113,4 @@ class MAXApp(object):
 
         self.app.before_request(self.before)
         self.app.after_request(self.after)
-        self.app.run(host=host, port=port)
+        self.app.run(host=host, port=self.app.config["PORT"] if "PORT" in self.app.config else port)
