@@ -18,8 +18,7 @@ from flask import Flask, request, Response
 from flask_restx import Api, Namespace
 from flask_cors import CORS
 from .default_config import API_TITLE, API_DESC, API_VERSION
-from .utils import getLogger, logHandler, getHostnameAndIp, register
-import logging
+from .utils import getLogger, getHostnameAndIp, register
 
 MAX_API = Namespace('model', description='Model information and inference operations')
 
@@ -28,7 +27,7 @@ class MAXApp(object):
 
     def __init__(self, title=API_TITLE, desc=API_DESC, version=API_VERSION):
         self.app = Flask(title, static_url_path='')
-        self.app.logger.addHandler(logHandler("cyclonefw"))
+        self.app.logger = getLogger("cyclonefw")
         self.metrics = {}
         # load config
         if os.path.exists("config.py"):

@@ -1,2 +1,5 @@
 [bandit]
 exclude: /cyclonefw/tests/
+exclude: /logs/
+exclude: /.github/
+exclude: /boot.py
