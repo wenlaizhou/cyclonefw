@@ -93,6 +93,7 @@ class MAXApp(object):
 
         if "REGISTRY" in self.app.config:
             hostname, ip = getHostnameAndIp()
+            ip = self.app.config["IP"] if "IP" in self.app.config else ip
             register(self.app.config["REGISTRY"],
                      self.app.config["NAME"] if "NAME" in self.app.config else ip,
                      ip, finalPort, [])
