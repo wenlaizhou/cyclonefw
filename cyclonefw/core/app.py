@@ -18,7 +18,7 @@ from flask import Flask, request, Response
 from flask_restx import Api, Namespace
 from flask_cors import CORS
 from .default_config import API_TITLE, API_DESC, API_VERSION
-from .utils import getLogger, logHandler
+from .utils import getLogger, logHandler, getHostnameAndIp, register
 import logging
 
 MAX_API = Namespace('model', description='Model information and inference operations')
@@ -85,6 +85,14 @@ class MAXApp(object):
         :return:
         """
 
+        finalPort = self.app.config["PORT"] if "PORT" in self.app.config else port
+
+        if "REGISTRY" in self.app.config:
+            hostname, ip = getHostnameAndIp()
+            register(self.app.config["REGISTRY"],
+                     self.app.config["NAME"] if "NAME" in self.app.config else ip,
+                     ip, finalPort, [])
+
         @self.app.route("/metrics", methods=("GET",))
         def metrics():
             """
@@ -113,4 +121,4 @@ class MAXApp(object):
 
         self.app.before_request(self.before)
         self.app.after_request(self.after)
-        self.app.run(host=host, port=self.app.config["PORT"] if "PORT" in self.app.config else port)
+        self.app.run(host=host, port=finalPort)

@@ -17,6 +17,8 @@ from flask import abort
 from cyclonefw.utils.image_utils import ImageProcessor
 import os, logging
 from logging.handlers import RotatingFileHandler
+import json
+import requests
 
 
 def redirect_errors_to_flask(func):
@@ -93,3 +95,53 @@ def getLogger(name, formatter="%(asctime)s %(levelname)s %(message)s", logPath="
     logger.setLevel(level)
     logger.addHandler(logHandler(name, logPath, formatter))
     return logger
+
+
+def register(consulServer, name, ip, port, tags):
+    """
+    注册到注册中心
+    :param consulServer:
+    :param name:
+    :param ip:
+    :param port:
+    :param tags:
+    :return:
+    """
+    data = {
+        "name": name,
+        "address": ip,
+        "port": port,
+        "tags": tags,
+        "check": {}
+    }
+    try:
+        resp = requests.put("{}/v1/agent/service/register".format(consulServer), headers={
+            "Content-Type": "application/json"
+        }, data=json.dumps(data))
+        print(resp)
+    except Exception as e:
+        print(e)
+
+
+def unregister(consulServer, name):
+    """
+    反注册到注册中心
+    :param consulServer:
+    :param name:
+    :return:
+    """
+    try:
+        requests.put("{}/v1/agent/service/deregister/{}".format(consulServer, name))
+    except Exception as e:
+        print(e)
+
+
+def getHostnameAndIp():
+    """
+    获取hostname及ip地址
+    :return: hostname, ip
+    """
+    import socket
+    hostname = socket.gethostname()
+    ip = socket.gethostbyname(hostname)
+    return hostname, ip
