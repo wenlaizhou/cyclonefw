@@ -20,11 +20,11 @@ with open('README.md') as f:
 
 setup(
     name='cyclonefw',
-    version='1.0.1',
+    version='1.0.2',
     description='A package to simplify the creation of MAX models',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/wenlaizhou/oceanfw',
+    url='https://github.com/wenlaizhou/cyclonefw',
     author='CODAIT',
     author_email='',
     license='Apache',
