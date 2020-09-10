@@ -96,7 +96,8 @@ class MAXApp(object):
             ip = self.app.config["IP"] if "IP" in self.app.config else ip
             register(self.app.config["REGISTRY"],
                      self.app.config["NAME"] if "NAME" in self.app.config else ip,
-                     ip, finalPort, [])
+                     ip, finalPort,
+                     self.app.config["TAGS"] if "TAGS" in self.app.config else [])
 
         @self.app.route("/metrics", methods=("GET",))
         def metrics():
