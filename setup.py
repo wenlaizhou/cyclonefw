@@ -20,7 +20,7 @@ with open('README.md') as f:
 
 setup(
     name='cyclonefw',
-    version='1.0.3',
+    version='1.0.4',
     description='A package to simplify the creation of MAX models',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -32,7 +32,7 @@ setup(
     zip_safe=True,
     install_requires=[
         'requests',
-        'flask-restx==0.2.0',
+        'flask-restx==0.1.1',
         'flask-cors==3.0.9',
         'Pillow==7.2.0',
         'numpy==1.19.1',
