@@ -48,10 +48,11 @@ class MAXApp(object):
         self.api.add_namespace(MAX_API)
 
         # enable cors if flag is set
-        if os.getenv('CORS_ENABLE') == 'true' and (
-                os.environ.get('WERKZEUG_RUN_MAIN') == 'true' or self.app.debug is not True):
-            CORS(self.app, origins='*')
-            print('NOTE: MAX Model Server is currently allowing cross-origin requests - (CORS ENABLED)')
+        # if os.getenv('CORS_ENABLE') == 'true' and (
+        #         os.environ.get('WERKZEUG_RUN_MAIN') == 'true' or self.app.debug is not True):
+        # 默认跨域
+        CORS(self.app, origins='*')
+        print('NOTE: MAX Model Server is currently allowing cross-origin requests - (CORS ENABLED)')
 
     def add_api(self, api, route):
         MAX_API.add_resource(api, route)
