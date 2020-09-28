@@ -32,6 +32,7 @@ setup(
     zip_safe=True,
     install_requires=[
         'requests',
+        'flask-restplus',
         'flask-restx==0.1.1',
         'flask-cors==3.0.9',
         'Pillow==7.2.0',
