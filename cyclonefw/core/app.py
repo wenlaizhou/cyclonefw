@@ -28,6 +28,14 @@ logging.getLogger("werkzeug").addHandler(logHandler("flask"))
 MAX_API = Namespace('model', description='Model information and inference operations')
 
 
+def getTraceId():
+    """
+    获取traceId值
+    :return:
+    """
+    return request.traceId
+
+
 class MAXApp(object):
 
     def __init__(self, title=API_TITLE, desc=API_DESC, version=API_VERSION):
