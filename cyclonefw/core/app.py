@@ -80,7 +80,18 @@ class MAXApp(object):
         return resp
 
     def before(self):
+        if request.headers.has_key("TRACE"):
+            request.traceId = request.headers["TRACE-ID"]
+        else:
+            request.traceId = ""
         request.__setattr__('access_time', int(time.time() * 1000))
+
+    def getTraceId(self):
+        """
+        获取traceId值
+        :return:
+        """
+        return request.traceId
 
     def run(self, host='0.0.0.0', port=5000):
         """
