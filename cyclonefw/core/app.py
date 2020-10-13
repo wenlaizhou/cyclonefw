@@ -88,7 +88,7 @@ class MAXApp(object):
         return resp
 
     def before(self):
-        if request.headers.has_key("TRACE"):
+        if request.headers.has_key("TRACE-ID"):
             request.traceId = request.headers["TRACE-ID"]
         else:
             request.traceId = ""

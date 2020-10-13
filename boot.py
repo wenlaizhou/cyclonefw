@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import cyclonefw
-from cyclonefw.core import MAX_API, PredictAPI
+from cyclonefw.core import MAX_API, PredictAPI, getTraceId, getLogger
 from flask_restplus import fields
 
 model_input = MAX_API.model('ModelInput', {
@@ -30,6 +30,8 @@ class ModelPredictAPI(PredictAPI):
 
         input_data = MAX_API.payload
         print(input_data)
+        traceId = getTraceId()  # 获取traceId 并写入日志
+        getLogger("MyLogger").info("[{}] [{}]".format(traceId, ""))
 
         # Modify this code if the schema is changed
         # label_preds = [{'label_id': p[0], 'label': p[1], 'probability': p[2]} for p in [x for x in preds]]
