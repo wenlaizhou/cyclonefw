@@ -24,4 +24,4 @@ jobs:
         run: |
           python3.6 setup.py sdist
           twine check dist/*
-          twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+          twine upload --verbose --repository-url https://upload.pypi.org/legacy/ dist/*
