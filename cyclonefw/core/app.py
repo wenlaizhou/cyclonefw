@@ -92,6 +92,12 @@ class MAXApp(object):
             request.traceId = request.headers["TRACE-ID"]
         else:
             request.traceId = ""
+        # 0. 判断header是否含有 batch-execute
+        # MAX_API.resources # 1. 获取路径对应的方法
+        # 2. 将payload写为数组里的单个元素
+        # 3. for 调用
+        # 4. 结果合并
+        # 5. exit 返回结果, 不允许请求进行下一步动作
         request.__setattr__('access_time', int(time.time() * 1000))
 
     def getTraceId(self):
