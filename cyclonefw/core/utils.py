@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 from flask import abort
-from cyclonefw.utils.image_utils import ImageProcessor
 import os, logging
 from logging.handlers import RotatingFileHandler
 import json
@@ -43,28 +42,6 @@ def redirect_errors_to_flask(func):
                            " is a common image format such as JPG or PNG.")
 
     return inner
-
-
-class MAXImageProcessor(ImageProcessor):
-    """Composes several transforms together.
-
-    Args:
-        transforms (list of ``Transform`` objects): list of transforms to compose.
-
-    Example:
-        >>> pipeline = ImageProcessor([
-        >>>     Rotate(150),
-        >>>     Resize([100,100])
-        >>> ])
-        >>> pipeline.apply_transforms(img)
-    """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    @redirect_errors_to_flask
-    def apply_transforms(self, img):
-        return super().apply_transforms(img)
 
 
 def logHandler(name, logPath="logs", formatter="%(asctime)s %(levelname)s %(message)s"):
