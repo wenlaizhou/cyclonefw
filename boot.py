@@ -23,7 +23,7 @@ class ModelPredictAPI(PredictAPI):
 
     @MAX_API.doc('predict')
     @MAX_API.marshal_with(predict_response)
-    # @MAX_API.add_model("param", "111") todo: add_model 返回值为非atturator类型
+    @MAX_API.add_model("param", "111")  # todo: add_model 返回值为非atturator类型
     def post(self):
         """Make a prediction given input data"""
         result = {'status': 'error'}

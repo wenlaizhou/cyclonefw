@@ -25,7 +25,18 @@ import logging
 # 重新定义flask日志
 logging.getLogger("werkzeug").addHandler(logHandler("flask"))
 
-MAX_API = Namespace('model', description='Model information and inference operations')
+
+class ApiNamespace(Namespace):
+    def add_model(self, name, definition):
+        super(ApiNamespace, self).add_model(name, definition)
+
+        def wrapper(fn):
+            return fn
+
+        return wrapper
+
+
+MAX_API = ApiNamespace('model', description='Model information and inference operations')
 
 
 def getTraceId():
@@ -121,9 +132,9 @@ class MAXApp(object):
             hostname, ip = getHostnameAndIp()
             ip = self.app.config["IP"] if "IP" in self.app.config else ip
             register(self.app.config["REGISTRY"],
-                     self.app.config["NAME"] if "NAME" in self.app.config else ip,
-                     ip, finalPort,
-                     self.app.config["TAGS"] if "TAGS" in self.app.config else [])
+                self.app.config["NAME"] if "NAME" in self.app.config else ip,
+                ip, finalPort,
+                self.app.config["TAGS"] if "TAGS" in self.app.config else [])
 
         @self.app.route("/metrics", methods=("GET",))
         def metrics():
