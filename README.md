@@ -1,5 +1,4 @@
 # cyclone ai-platform python framework
-thanks ibm max framework
 
 ## Dependencies
 * [flask-restx](https://pypi.org/project/flask-restx/0.1.1/)
