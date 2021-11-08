@@ -1,7 +1,7 @@
 # cyclone python framework
 
 ## Project Page
-* [cyclonefw](http://cyclonefw.mycyclone.com)
+* [cyclonefw](http://cyclonefw.cyclone-robotics.com)
 
 ## Dependencies
 * [flask-restx](https://pypi.org/project/flask-restx/0.1.1/)
